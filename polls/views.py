@@ -26,7 +26,7 @@ class SignUpView(View):
             uname = request.POST["uname"]
             email = request.POST["email"]
             pwd = request.POST["pwd"]
-            if not re.fullmatch(r"^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$", email):
+            if not re.fullmatch(r"^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$", email):
                 u = User.objects.create_user(username=uname, email=email, password=pwd)
                 u.save()
                 res = {"status": 1, "message": "User Successfully created.. Please login."}
