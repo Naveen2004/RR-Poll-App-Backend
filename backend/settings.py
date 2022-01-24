@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-ufiylolle&)%qd82uso7m^i%*h--yfqejnfp51r26vdyd_m^d7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["ec2-3-6-198-164.ap-south-1.compute.amazonaws.com", "3.6.198.164"]
+ALLOWED_HOSTS = ["ec2-3-6-198-164.ap-south-1.compute.amazonaws.com", "3.6.198.164", "3.6.198.164.nip.io", ]
 
 # Application definition
 
@@ -72,11 +72,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 # CORS CONFIG
-CORS_ALLOWED_ORIGINS = ["https://rr-polls.netlify.app", "http://localhost:3000", "https://rr-polls.web.app"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "https://rr-polls.web.app"]
 CORS_ALLOW_CREDENTIALS = True
 
 # CSRF SETUP
 CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
+CSRF_COOKIE_SAMESITE = "None"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
