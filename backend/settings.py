@@ -72,7 +72,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 # CORS CONFIG
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "https://rr-polls.web.app"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "https://rr-polls.web.app", "https://3.6.198.164.nip/io"]
 CORS_ALLOW_CREDENTIALS = True
 
 # CSRF SETUP
@@ -81,7 +81,6 @@ CSRF_COOKIE_SAMESITE = "None"
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SAMESITE = "None"
 SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_PATH = None
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
