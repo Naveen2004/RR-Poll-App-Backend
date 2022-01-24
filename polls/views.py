@@ -103,8 +103,9 @@ class DashboardView(View):
             res = {"status": 1, "uname": user.username, "recentpolls": recent_polls[::-1][:10]}
         else:
             res = {"status": -1, "message": "unauthenticated"}
-            res = JsonResponse(res)
-            res.set_cookie("csrftoken", get_token(request))
+
+        res = JsonResponse(res)
+        res.set_cookie("csrftoken", get_token(request))
         return res
 
     def post(self, request: Request):
