@@ -71,7 +71,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 # CORS CONFIG
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "https://rr-polls.web.app", "https://3.6.198.164.nipio"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "https://rr-polls.web.app", "https://3.6.198.164.nip.io"]
 CORS_ALLOW_CREDENTIALS = True
 
 # CSRF SETUP
