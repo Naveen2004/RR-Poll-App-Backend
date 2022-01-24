@@ -18,9 +18,7 @@ class SignUpView(View):
             res = {"status": 1}
         else:
             res = {"status": -1}
-        res["csrftoken"] = get_token(request)
         res = JsonResponse(res)
-        res.set_cookie("csrftoken", get_token(request))
         return res
 
     def post(self, request):
@@ -42,7 +40,6 @@ class SignUpView(View):
 
         except KeyError as e:
             res = {"status": -1, "message": f"Field {str(e)} is not defined"}
-        res["csrftoken"] = get_token(request)
 
         return JsonResponse(res)
 
@@ -56,9 +53,7 @@ class LoginView(View):
         else:
             res = {"status": -1}
 
-        res["csrftoken"] = get_token(request)
         res = JsonResponse(res)
-        res.set_cookie("csrftoken", get_token(request))
         return res
 
     def post(self, request: Request):
@@ -75,7 +70,6 @@ class LoginView(View):
                 res = {"status": -1, "message": "Invalid Credentials"}
         except KeyError as e:
             res = {"status": -1, "message": f"Field {str(e)} is missing.."}
-        res["csrftoken"] = get_token(request)
 
         return JsonResponse(res)
 
@@ -105,10 +99,8 @@ class DashboardView(View):
             res = {"status": 1, "uname": user.username, "recentpolls": recent_polls[::-1][:10]}
         else:
             res = {"status": -1, "message": "unauthenticated"}
-        res["csrftoken"] = get_token(request)
 
         res = JsonResponse(res)
-        res.set_cookie("csrftoken", get_token(request))
         return res
 
     def post(self, request: Request):
@@ -129,7 +121,6 @@ class DashboardView(View):
 
         else:
             res = {"status": -1, "message": "unauthenticated"}
-        res["csrftoken"] = get_token(request)
 
         return JsonResponse(res)
 
@@ -139,7 +130,6 @@ class DashboardView(View):
             res = {"status": 1, "message": "logged_out"}
         else:
             res = {"status": -1, "message": "Invalid Operation"}
-        res["csrftoken"] = get_token(request)
 
         return JsonResponse(res)
 
@@ -155,7 +145,6 @@ class DashboardView(View):
                 res = {"status": -1, "message": "Unauthorized"}
         else:
             res = {"status": -1, "message": "Unauthorized"}
-        res["csrftoken"] = get_token(request)
 
         return JsonResponse(res)
 
@@ -214,6 +203,5 @@ class PollView(View):
                    "totalvotes": sum([x for x in voting_options if x is not None])}
         else:
             res = {"status": -1, "message": "Invalid Poll ID.."}
-        res["csrftoken"] = get_token(request)
 
         return JsonResponse(res)
