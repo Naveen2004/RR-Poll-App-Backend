@@ -76,7 +76,7 @@ CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "https://rr-polls.web.app", "ht
 CORS_ALLOW_CREDENTIALS = True
 
 # CSRF SETUP
-CSRF_TRUSTED_ORIGINS = ["localhost:3000", "rr-polls.web.app", "web.app", "3.6.198.164.nip.io"]
+CSRF_TRUSTED_ORIGINS = ["localhost:3000", "rr-polls.web.app", "https://rr-polls.web.app", "3.6.198.164.nip.io"]
 CSRF_COOKIE_SAMESITE = "None"
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SAMESITE = "None"
