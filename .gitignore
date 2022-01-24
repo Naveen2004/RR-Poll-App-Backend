@@ -1,5 +1,4 @@
 /.idea
-db.sqlite3
 /polls/migrations
 /venv
 /__pycache__

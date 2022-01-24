@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.handlers.wsgi import WSGIRequest as Request
 from django.http import JsonResponse
+from django.middleware.csrf import get_token
 from django.views.generic import View
 
 from .models import *
@@ -17,7 +18,9 @@ class SignUpView(View):
             res = {"status": 1}
         else:
             res = {"status": -1}
-        return JsonResponse(res)
+        res = JsonResponse(res)
+        res.set_cookie("csrftoken", get_token(request))
+        return res
 
     def post(self, request):
         res = {}
@@ -40,11 +43,15 @@ class SignUpView(View):
 
 class LoginView(View):
     def get(self, request: Request):
+
+        print(get_token(request))
         if request.user.is_authenticated:
             res = {"status": 1}
         else:
             res = {"status": -1}
-        return JsonResponse(res)
+        res = JsonResponse(res)
+        res.set_cookie("csrftoken", get_token(request))
+        return res
 
     def post(self, request: Request):
 
@@ -89,7 +96,9 @@ class DashboardView(View):
             res = {"status": 1, "uname": user.username, "recentpolls": recent_polls[::-1][:10]}
         else:
             res = {"status": -1, "message": "unauthenticated"}
-        return JsonResponse(res)
+            res = JsonResponse(res)
+            res.set_cookie("csrftoken", get_token(request))
+        return res
 
     def post(self, request: Request):
         if request.user.is_authenticated:
