@@ -18,6 +18,7 @@ class SignUpView(View):
             res = {"status": 1}
         else:
             res = {"status": -1}
+        res["csrftoken"] = get_token(request)
         res = JsonResponse(res)
         res.set_cookie("csrftoken", get_token(request))
         return res
@@ -30,9 +31,13 @@ class SignUpView(View):
             email = request.POST["email"]
             pwd = request.POST["pwd"]
             if not re.fullmatch(r"^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$", email):
-                u = User.objects.create_user(username=uname, email=email, password=pwd)
-                u.save()
-                res = {"status": 1, "message": "User Successfully created.. Please login."}
+                if not User.objects.filter(username=uname).exists():
+                    u = User.objects.create_user(username=uname, email=email, password=pwd)
+                    u.save()
+                    res = {"status": 1, "message": "User Successfully created.. Please login."}
+                else:
+                    res = {"status": -1, "message": "User already exists.."}
+
             else:
                 res = {"status": -1, "message": "Email Validation Failed.."}
 
@@ -49,6 +54,8 @@ class LoginView(View):
             res = {"status": 1}
         else:
             res = {"status": -1}
+            res["csrftoken"] = get_token(request)
+
         res = JsonResponse(res)
         res.set_cookie("csrftoken", get_token(request))
         return res
