@@ -13,15 +13,18 @@ from .utils import *
 
 
 class SignUpView(View):
-    def get(self, request):
+    def get(self, request: Request) -> JsonResponse:
         if request.user.is_authenticated:
             res = {"status": 1}
         else:
             res = {"status": -1}
         res = JsonResponse(res)
+        res.set_cookie("csrftoken", get_token(request), domain="3.6.198.164.nip.io",
+                       expires=datetime.datetime.now() + datetime.timedelta(days=365), max_age=1209600, samesite="None",
+                       secure=True)
         return res
 
-    def post(self, request):
+    def post(self, request: Request) -> JsonResponse:
 
         try:
             uname = request.POST["uname"]
@@ -45,7 +48,7 @@ class SignUpView(View):
 
 
 class LoginView(View):
-    def get(self, request: Request):
+    def get(self, request: Request) -> JsonResponse:
 
         print(get_token(request))
         if request.user.is_authenticated:
@@ -59,7 +62,7 @@ class LoginView(View):
                        secure=True)
         return res
 
-    def post(self, request: Request):
+    def post(self, request: Request) -> JsonResponse:
 
         try:
             uname = request.POST["uname"]
@@ -79,7 +82,7 @@ class LoginView(View):
 
 class DashboardView(View):
 
-    def get(self, request: Request):
+    def get(self, request: Request) -> JsonResponse:
         if request.user.is_authenticated:
             user = request.user
             recent_polls = []
@@ -102,11 +105,13 @@ class DashboardView(View):
             res = {"status": 1, "uname": user.username, "recentpolls": recent_polls[::-1][:10]}
         else:
             res = {"status": -1, "message": "unauthenticated"}
-
+        res.set_cookie("csrftoken", get_token(request), domain="3.6.198.164.nip.io",
+                       expires=datetime.datetime.now() + datetime.timedelta(days=365), max_age=1209600, samesite="None",
+                       secure=True)
         res = JsonResponse(res)
         return res
 
-    def post(self, request: Request):
+    def post(self, request: Request) -> JsonResponse:
         if request.user.is_authenticated:
             user = request.user
             question = request.POST["question"]
@@ -127,7 +132,7 @@ class DashboardView(View):
 
         return JsonResponse(res)
 
-    def put(self, request: Request):
+    def put(self, request: Request) -> JsonResponse:
         if request.user.is_authenticated:
             logout(request)
             res = {"status": 1, "message": "logged_out"}
@@ -136,7 +141,7 @@ class DashboardView(View):
 
         return JsonResponse(res)
 
-    def delete(self, request: Request, id=""):
+    def delete(self, request: Request, id="") -> JsonResponse:
         if request.user.is_authenticated:
             user = request.user
             p = Polls.objects.filter(created_by=user, poll_id=id)
@@ -154,7 +159,7 @@ class DashboardView(View):
 
 class PollView(View):
 
-    def get(self, request: Request, id=""):
+    def get(self, request: Request, id="") -> JsonResponse:
         res = {}
         poll_id = id
         p = Polls.objects.filter(poll_id=poll_id)
@@ -169,9 +174,12 @@ class PollView(View):
             res = {"status": 1, "data": data}
         else:
             res = {"status": -1, "message": "Invalid Poll ID.."}
+        res.set_cookie("csrftoken", get_token(request), domain="3.6.198.164.nip.io",
+                       expires=datetime.datetime.now() + datetime.timedelta(days=365), max_age=1209600, samesite="None",
+                       secure=True)
         return JsonResponse(res)
 
-    def post(self, request: Request, id=""):
+    def post(self, request: Request, id="") -> JsonResponse:
         poll_id = id
         poll = Polls.objects.filter(poll_id=poll_id)
         if poll and not ((datetime.datetime.now() - poll[0].created_on) >= timedelta(days=1)):
