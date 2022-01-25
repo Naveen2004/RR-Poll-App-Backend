@@ -1,5 +1,7 @@
 import datetime
 
+from django.core.handlers.wsgi import WSGIRequest as Request
+
 from polls.models import GeneralLog
 
 
@@ -11,7 +13,8 @@ class LogMiddleware(object):
     def __call__(self, request):
         return self.get_response(request)
 
-    def process_view(self, request, view_func, view_args, view_kwargs):
+    def process_view(self, request: Request, view_func, view_args, view_kwargs):
+        print(request.COOKIES.get("csrftoken"))
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
         user_agent = request.META.get('HTTP_USER_AGENT')
         if x_forwarded_for:
