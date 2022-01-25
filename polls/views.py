@@ -54,6 +54,7 @@ class LoginView(View):
             res = {"status": -1}
 
         res = JsonResponse(res)
+        res.set_cookie("csrftoken", get_token(request))
         return res
 
     def post(self, request: Request):
