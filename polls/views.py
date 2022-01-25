@@ -105,10 +105,10 @@ class DashboardView(View):
             res = {"status": 1, "uname": user.username, "recentpolls": recent_polls[::-1][:10]}
         else:
             res = {"status": -1, "message": "unauthenticated"}
+        res = JsonResponse(res)
         res.set_cookie("csrftoken", get_token(request), domain="3.6.198.164.nip.io",
                        expires=datetime.datetime.now() + datetime.timedelta(days=365), max_age=1209600, samesite="None",
                        secure=True)
-        res = JsonResponse(res)
         return res
 
     def post(self, request: Request) -> JsonResponse:
@@ -174,10 +174,11 @@ class PollView(View):
             res = {"status": 1, "data": data}
         else:
             res = {"status": -1, "message": "Invalid Poll ID.."}
+        res = JsonResponse(res)
         res.set_cookie("csrftoken", get_token(request), domain="3.6.198.164.nip.io",
                        expires=datetime.datetime.now() + datetime.timedelta(days=365), max_age=1209600, samesite="None",
                        secure=True)
-        return JsonResponse(res)
+        return res
 
     def post(self, request: Request, id="") -> JsonResponse:
         poll_id = id
