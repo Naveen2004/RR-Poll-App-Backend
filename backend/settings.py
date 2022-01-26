@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ufiylolle&)%qd82uso7m^i%*h--yfqejnfp51r26vdyd_m^d7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["ec2-3-6-198-164.ap-south-1.compute.amazonaws.com", "3.6.198.164", "3.6.198.164.nip.io", ]
 
@@ -81,10 +81,12 @@ CSRF_COOKIE_SAMESITE = "None"
 CSRF_COOKIE_SECURE = True
 CSRF_USE_SESSIONS = True
 CSRF_COOKIE_DOMAIN = "3.6.198.164.nip.io"
-# SESSION_COOKIE_HTTPONLY = False
+
+# SESSION SETUP
 SESSION_COOKIE_DOMAIN = CSRF_COOKIE_DOMAIN
 SESSION_COOKIE_SAMESITE = "None"
 SESSION_COOKIE_SECURE = True
+
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
