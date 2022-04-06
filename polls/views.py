@@ -19,7 +19,7 @@ class SignUpView(View):
         else:
             res = {"status": -1}
         res = JsonResponse(res)
-        res.set_cookie("csrftoken", get_token(request), domain="3.6.198.164.nip.io",
+        res.set_cookie("csrftoken", get_token(request), domain="rr-polls.herokuapp.com",
                        expires=datetime.datetime.now() + datetime.timedelta(days=365), max_age=1209600, samesite="None",
                        secure=True)
         return res
@@ -57,7 +57,7 @@ class LoginView(View):
             res = {"status": -1}
 
         res = JsonResponse(res)
-        res.set_cookie("csrftoken", get_token(request), domain="3.6.198.164.nip.io",
+        res.set_cookie("csrftoken", get_token(request), domain="rr-polls.herokuapp.com",
                        expires=datetime.datetime.now() + datetime.timedelta(days=365), max_age=1209600, samesite="None",
                        secure=True)
         return res
@@ -106,7 +106,7 @@ class DashboardView(View):
         else:
             res = {"status": -1, "message": "unauthenticated"}
         res = JsonResponse(res)
-        res.set_cookie("csrftoken", get_token(request), domain="3.6.198.164.nip.io",
+        res.set_cookie("csrftoken", get_token(request), domain="rr-polls.herokuapp.com",
                        expires=datetime.datetime.now() + datetime.timedelta(days=365), max_age=1209600, samesite="None",
                        secure=True)
         return res
@@ -175,7 +175,7 @@ class PollView(View):
         else:
             res = {"status": -1, "message": "Invalid Poll ID.."}
         res = JsonResponse(res)
-        res.set_cookie("csrftoken", get_token(request), domain="3.6.198.164.nip.io",
+        res.set_cookie("csrftoken", get_token(request), domain="rr-polls.herokuapp.com",
                        expires=datetime.datetime.now() + datetime.timedelta(days=365), max_age=1209600, samesite="None",
                        secure=True)
         return res
