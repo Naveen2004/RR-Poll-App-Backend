@@ -72,7 +72,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 # CORS CONFIG
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "https://rr-polls.web.app", "https://3.6.198.164.nip.io"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "https://rr-polls.web.app", "https://3.6.198.164.nip.io", "https://rr-polls.herokuapp.com"]
 CORS_ALLOW_CREDENTIALS = True
 
 # CSRF SETUP
@@ -80,7 +80,7 @@ CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
 CSRF_COOKIE_SAMESITE = "None"
 CSRF_COOKIE_SECURE = True
 CSRF_USE_SESSIONS = True
-CSRF_COOKIE_DOMAIN = "3.6.198.164.nip.io"
+CSRF_COOKIE_DOMAIN = "rr-polls.herokuapp.com"
 
 # SESSION SETUP
 SESSION_COOKIE_DOMAIN = CSRF_COOKIE_DOMAIN
